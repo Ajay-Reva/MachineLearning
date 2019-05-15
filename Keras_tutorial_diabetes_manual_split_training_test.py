@@ -1,3 +1,4 @@
+#Following a tutorial from Machine Learning Mastry - Deep Learning with python textbook
 from keras.models import Sequential
 from keras.layers import Dense
 import numpy
