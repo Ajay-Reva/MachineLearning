@@ -17,6 +17,9 @@ X_test = dataset[600:768,0:8] #test data is split - the rest of the data apart f
 Y_test = dataset[600:768,8] #test data is split - the rest of the data apart from training set
 
 
+X = dataset[:,0:8] #all rows of the dataset, columns from 0-7 (8th is not included when written as 0:8).
+Y = dataset[:,8]   #all rows of the dataset, only the last column that says if it is an onset of diabetes or not.
+
 #define the model.
 model = Sequential()
 model.add(Dense(12, input_dim=8, init='uniform', activation='relu')) #network architecture ===> Input_layer(8 inputs - columns 0-7 per row) ------> DenseLayer1(12 neurons) ------> DenseLayer2(8 neurons) -----> DenseLayer3(1 neuron)
@@ -27,7 +30,7 @@ model.add(Dense(1, init='uniform', activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 #fit the model.
-model.fit(X_train,Y_train, nb_epoch=150, batch_size=10) #Epochs - number of times the network sees the entire training dataset, batch_size - number of samples after which the weights are updated.
+model.fit(X, Y, validation_split=0.33, nb_epoch=150, batch_size=10) #Epochs - number of times the network sees the entire training dataset, batch_size - number of samples after which the weights are updated.
 
 #evaluate the model.
 scores = model.evaluate(X_test,Y_test)
